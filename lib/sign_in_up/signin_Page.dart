@@ -128,9 +128,10 @@ class _SignInPageState extends State<SignInPage> {
                           borderRadius: BorderRadius.circular(50.0),
                         ),
                         hintText: "Email",
+                        hintStyle: TextStyle(fontSize: 16.0, color:fontColor),
                         suffixIcon: Icon(
                           Icons.email_outlined,
-                          color: Colors.black54,
+                          color: fontColor,
                         ),
                       ),
                     ),
@@ -166,6 +167,7 @@ class _SignInPageState extends State<SignInPage> {
                           borderRadius: BorderRadius.circular(50.0),
                         ),
                         hintText: "Password",
+                        hintStyle: TextStyle(fontSize: 16.0, color:fontColor),
                         suffixIcon: IconButton(
                           onPressed: () {
                             setState(() {
@@ -176,7 +178,7 @@ class _SignInPageState extends State<SignInPage> {
                             isObsecure == true
                                 ? Icons.visibility
                                 : Icons.visibility_off,
-                            color: Colors.black54,
+                            color: fontColor,
                           ),
                         ),
                       ),

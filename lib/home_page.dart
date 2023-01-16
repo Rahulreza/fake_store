@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:fakestore/add_new_product.dart';
 import 'package:fakestore/add_product.dart';
 import 'package:fakestore/auth/custom_http.dart';
 import 'package:fakestore/model/all_order_model.dart';
@@ -94,7 +95,7 @@ class _HomePageState extends State<HomePage> {
         onPressed: (){
           setState(
                 () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AddProduct()));
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AddNewProductPage()));
             },
           );
         },

@@ -1,3 +1,4 @@
+import 'package:fakestore/home_page.dart';
 import 'package:fakestore/profile/user_profile.dart';
 import 'package:fakestore/sign_in_up/signin_Page.dart';
 import 'package:fakestore/widgets/color.dart';
@@ -9,40 +10,42 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
-class SignUpPage extends StatefulWidget {
-  const SignUpPage({Key? key}) : super(key: key);
+class AddNewProductPage extends StatefulWidget {
+  const AddNewProductPage({Key? key}) : super(key: key);
 
   @override
-  State<SignUpPage> createState() => _SignUpPageState();
+  State<AddNewProductPage> createState() => _AddNewProductPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _avatorController = TextEditingController();
+class _AddNewProductPageState extends State<AddNewProductPage> {
+  TextEditingController _titleController = TextEditingController();
+  TextEditingController _priceController = TextEditingController();
+  TextEditingController _descriptionController = TextEditingController();
+  TextEditingController _categoryIdController = TextEditingController();
+  TextEditingController _imagesController = TextEditingController();
   final GlobalKey<FormState> _fromkey = GlobalKey();
   bool isObsecure = true;
 
-  getSignUp() async {
+  getAddProductPage() async {
     try {
       setState(() {
         isLoading = true;
       });
       SharedPreferences sharedPreferences =
       await SharedPreferences.getInstance();
-      String link = "${baseUrl}users/";
+      String link = "${baseUrl}products/";
       var map = Map<String, dynamic>();
-      map["name"] = _nameController.text.toString();
-      map["email"] = _emailController.text.toString();
-      map["password"] = _passwordController.text.toString();
-      map["avatar"] = _avatorController.text.toString();
+      map["title"] = _titleController.text.toString();
+      map["price"] = _priceController.text.toString();
+      map["description"] = _descriptionController.text.toString();
+      map["categoryId"] = _categoryIdController.text.toString();
+      map["images"] = _imagesController.text.toString();
       var responce = await http.post(Uri.parse(link), body: map);
       var data = jsonDecode(responce.body);
       setState(() {
         isLoading = false;
       });
-      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SignInPage()));
+      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>HomePage()));
       // print("access token is ${data["access_token"]}");
       // if (data["access_token"] != null) {
       //   sharedPreferences.setString("token", data["access_token"]);
@@ -63,10 +66,12 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   void dispose() {
     // TODO: implement dispose
-    _emailController.dispose();
-    _passwordController.dispose();
-    _nameController.dispose();
-    _avatorController.dispose();
+    _titleController.dispose();
+    _priceController.dispose();
+    _descriptionController.dispose();
+    _categoryIdController.dispose();
+    _imagesController.dispose();
+
     super.dispose();
   }
   @override
@@ -110,13 +115,13 @@ class _SignUpPageState extends State<SignUpPage> {
                   children: [
                     //Center(child: Text("Login", style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold, color: Colors.white),)),
                     SizedBox(
-                      height: 50,
+                      height: 10,
                     ),
                     TextField(
                       style: TextStyle(
                           color: fontColor
                       ),
-                      controller: _nameController,
+                      controller: _titleController,
                       decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
@@ -132,10 +137,10 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                           borderRadius: BorderRadius.circular(50.0),
                         ),
-                        hintText: "Name",
+                        hintText: "Title",
                         hintStyle: TextStyle(fontSize: 16.0, color:fontColor),
                         suffixIcon: Icon(
-                          Icons.drive_file_rename_outline,
+                          Icons.title,
                           color: fontColor,
                         ),
                       ),
@@ -148,7 +153,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       style: TextStyle(
                           color: fontColor
                       ),
-                      controller: _emailController,
+                      controller: _priceController,
                       decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
@@ -164,10 +169,10 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                           borderRadius: BorderRadius.circular(50.0),
                         ),
-                        hintText: "Email",
+                        hintText: "Price",
                         hintStyle: TextStyle(fontSize: 16.0, color:fontColor),
                         suffixIcon: Icon(
-                          Icons.email_outlined,
+                          Icons.price_check,
                           color: fontColor,
                         ),
                       ),
@@ -175,59 +180,12 @@ class _SignUpPageState extends State<SignUpPage> {
                     SizedBox(
                       height: 20,
                     ),
-                    TextFormField(
-                      style: TextStyle(
-                          color: fontColor
-                      ),
-                      controller: _passwordController,
-                      obscureText: isObsecure,
-                      obscuringCharacter: "•",
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please Enter Password';
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            width: 3,
-                            color: Color(0xff7B81EC),
-                          ),
-                          borderRadius: BorderRadius.circular(50.0),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            width: 3,
-                            color: Color(0xff7B81EC),
-                          ),
-                          borderRadius: BorderRadius.circular(50.0),
-                        ),
-                        hintText: "Password",
-                        hintStyle: TextStyle(fontSize: 16.0, color:fontColor),
-                        suffixIcon: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              isObsecure = !isObsecure;
-                            });
-                          },
-                          icon: Icon(
-                            isObsecure == true
-                                ? Icons.visibility
-                                : Icons.visibility_off,
-                            color: fontColor,
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
+
                     TextField(
                       style: TextStyle(
                           color: fontColor
                       ),
-                      controller: _avatorController,
+                      controller: _descriptionController,
                       decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
@@ -243,23 +201,87 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                           borderRadius: BorderRadius.circular(50.0),
                         ),
-                        hintText: "Avator Link",
+                        hintText: "Description",
                         hintStyle: TextStyle(fontSize: 16.0, color:fontColor),
                         suffixIcon: Icon(
-                          Icons.person,
+                          Icons.description,
                           color: fontColor,
                         ),
                       ),
                     ),
-
                     SizedBox(
                       height: 20,
                     ),
+
+                    TextField(
+                      style: TextStyle(
+                          color: fontColor
+                      ),
+                      controller: _categoryIdController,
+                      decoration: InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            width: 3,
+                            color: Color(0xff7B81EC),
+                          ),
+                          borderRadius: BorderRadius.circular(50.0),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            width: 3,
+                            color: Color(0xff7B81EC),
+                          ),
+                          borderRadius: BorderRadius.circular(50.0),
+                        ),
+                        hintText: "Category",
+                        hintStyle: TextStyle(fontSize: 16.0, color:fontColor),
+                        suffixIcon: Icon(
+                          Icons.category,
+                          color: fontColor,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+
+                    TextField(
+                      style: TextStyle(
+                          color: fontColor
+                      ),
+                      controller: _imagesController,
+                      decoration: InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            width: 3,
+                            color: Color(0xff7B81EC),
+                          ),
+                          borderRadius: BorderRadius.circular(50.0),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            width: 3,
+                            color: Color(0xff7B81EC),
+                          ),
+                          borderRadius: BorderRadius.circular(50.0),
+                        ),
+                        hintText: "Image Link",
+                        hintStyle: TextStyle(fontSize: 16.0, color:fontColor),
+                        suffixIcon: Icon(
+                          Icons.image,
+                          color: fontColor,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+
 
                     InkWell(
                       onTap: () {
                         if (_fromkey.currentState!.validate()) {
-                          getSignUp();
+                          getAddProductPage();
                         } else {
                           showInToast("Enter all fields");
                         }
@@ -268,7 +290,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         height: 55,
                         child: Center(
                             child: Text(
-                              "Sign Up",
+                              "Upload Product",
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 18,
