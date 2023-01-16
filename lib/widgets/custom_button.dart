@@ -28,7 +28,7 @@ class Custom_Buttom extends StatelessWidget {
         borderRadius: BorderRadius.circular(28),
       ),
       color: isBlue==true?Color(0xff246BFD):Colors.transparent,
-      child: Text("$title",style: myStyle(17,Color(0xffFFFFFF) ),),
+      child: Text("$title",style: myStyle(14,Color(0xffFFFFFF) ),),
     );
   }
 }

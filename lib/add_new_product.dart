@@ -115,7 +115,7 @@ class _AddNewProductPageState extends State<AddNewProductPage> {
                   children: [
                     //Center(child: Text("Login", style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold, color: Colors.white),)),
                     SizedBox(
-                      height: 10,
+                      height: 50,
                     ),
                     TextField(
                       style: TextStyle(
@@ -137,139 +137,10 @@ class _AddNewProductPageState extends State<AddNewProductPage> {
                           ),
                           borderRadius: BorderRadius.circular(50.0),
                         ),
-                        hintText: "Title",
-                        hintStyle: TextStyle(fontSize: 16.0, color:fontColor),
+                        hintText: "Name",
                         suffixIcon: Icon(
-                          Icons.title,
-                          color: fontColor,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-
-                    TextField(
-                      style: TextStyle(
-                          color: fontColor
-                      ),
-                      controller: _priceController,
-                      decoration: InputDecoration(
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            width: 3,
-                            color: Color(0xff7B81EC),
-                          ),
-                          borderRadius: BorderRadius.circular(50.0),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            width: 3,
-                            color: Color(0xff7B81EC),
-                          ),
-                          borderRadius: BorderRadius.circular(50.0),
-                        ),
-                        hintText: "Price",
-                        hintStyle: TextStyle(fontSize: 16.0, color:fontColor),
-                        suffixIcon: Icon(
-                          Icons.price_check,
-                          color: fontColor,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-
-                    TextField(
-                      style: TextStyle(
-                          color: fontColor
-                      ),
-                      controller: _descriptionController,
-                      decoration: InputDecoration(
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            width: 3,
-                            color: Color(0xff7B81EC),
-                          ),
-                          borderRadius: BorderRadius.circular(50.0),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            width: 3,
-                            color: Color(0xff7B81EC),
-                          ),
-                          borderRadius: BorderRadius.circular(50.0),
-                        ),
-                        hintText: "Description",
-                        hintStyle: TextStyle(fontSize: 16.0, color:fontColor),
-                        suffixIcon: Icon(
-                          Icons.description,
-                          color: fontColor,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-
-                    TextField(
-                      style: TextStyle(
-                          color: fontColor
-                      ),
-                      controller: _categoryIdController,
-                      decoration: InputDecoration(
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            width: 3,
-                            color: Color(0xff7B81EC),
-                          ),
-                          borderRadius: BorderRadius.circular(50.0),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            width: 3,
-                            color: Color(0xff7B81EC),
-                          ),
-                          borderRadius: BorderRadius.circular(50.0),
-                        ),
-                        hintText: "Category",
-                        hintStyle: TextStyle(fontSize: 16.0, color:fontColor),
-                        suffixIcon: Icon(
-                          Icons.category,
-                          color: fontColor,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-
-                    TextField(
-                      style: TextStyle(
-                          color: fontColor
-                      ),
-                      controller: _imagesController,
-                      decoration: InputDecoration(
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            width: 3,
-                            color: Color(0xff7B81EC),
-                          ),
-                          borderRadius: BorderRadius.circular(50.0),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            width: 3,
-                            color: Color(0xff7B81EC),
-                          ),
-                          borderRadius: BorderRadius.circular(50.0),
-                        ),
-                        hintText: "Image Link",
-                        hintStyle: TextStyle(fontSize: 16.0, color:fontColor),
-                        suffixIcon: Icon(
-                          Icons.image,
-                          color: fontColor,
+                          Icons.drive_file_rename_outline,
+                          color: Colors.black54,
                         ),
                       ),
                     ),

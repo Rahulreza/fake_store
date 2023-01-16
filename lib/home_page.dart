@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> {
     String uriLink = "${baseUrl}products/";
     var response = await http.get(Uri.parse(uriLink),
         headers: await CustomHttpRequest.getHeaderWithToken());
-    print("data areeeeeeeeeeeee${response.body}");
+    print("data for order: ${response.body}");
     var data = jsonDecode(response.body);
     for (var i in data) {
       orderModel = OrderModel.fromJson(i);
@@ -92,10 +92,15 @@ class _HomePageState extends State<HomePage> {
         //     return  AddProduct();
         //   });
         // },
-        onPressed: (){
+        onPressed: () {
           setState(
-                () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AddNewProductPage()));
+            () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(
+                      builder: (context) => AddProduct()))
+                  .then((value) =>
+                      Provider.of<OrderProvider>(context, listen: false)
+                          .getOrderData());
             },
           );
         },
@@ -114,7 +119,6 @@ class _HomePageState extends State<HomePage> {
               itemCount: orderList.length,
               itemBuilder: (BuildContext ctx, index) {
                 return Container(
-
                   margin: EdgeInsets.all(10),
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
@@ -122,20 +126,18 @@ class _HomePageState extends State<HomePage> {
                       borderRadius: BorderRadius.circular(15)),
                   child: Column(
                     children: [
-
-                         Expanded(
-                           flex: 4,
-                           child: ClipRRect(
-                             borderRadius: BorderRadius.circular(10),
-
-                             child: Image.network(
-                                "${orderList[index].category!.image}",
-                                fit: BoxFit.cover,
-                              width: 100,
-                              height: 80,
+                      Expanded(
+                        flex: 4,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.network(
+                            "${orderList[index].category!.image}",
+                            fit: BoxFit.cover,
+                            width: 100,
+                            height: 80,
+                          ),
                         ),
-                           ),
-                         ),
+                      ),
                       Expanded(
                         flex: 1,
                         child: Row(
@@ -156,11 +158,9 @@ class _HomePageState extends State<HomePage> {
                           style: myStyle(11, dialogBGColor, FontWeight.bold),
                         ),
                       ),
-
                       Expanded(
                         flex: 1,
                         child: Container(
-
                           child: Center(
                               child: Text(
                             "Price: ${orderList[index].price}",

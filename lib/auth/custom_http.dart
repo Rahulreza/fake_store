@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:fakestore/model/category_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:fakestore/model/all_order_model.dart';
 import 'package:fakestore/widgets/common_widgets.dart';
@@ -31,4 +32,20 @@ orderList.add(orderModel);
 }
 return orderList;
 }
+
+
+  static Future<List<CategoryModel>> fetchAllCategory() async {
+    List<CategoryModel> categoryList = [];
+    CategoryModel categoryModel;
+    String uriLink = "${baseUrl}category";
+    var response = await http.get(Uri.parse(uriLink),
+        headers: await CustomHttpRequest.getHeaderWithToken());
+    print("data areeeeeeeeeeeee${response.body}");
+    var data = jsonDecode(response.body);
+    for (var i in data) {
+      categoryModel = CategoryModel.fromJson(i);
+      categoryList.add(categoryModel);
+    }
+    return categoryList;
+  }
 }
