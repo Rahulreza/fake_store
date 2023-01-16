@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:fakestore/profile/user_profile.dart';
+import 'package:fakestore/sign_in_up/sign_up_page.dart';
 import 'package:fakestore/widgets/color.dart';
 import 'package:http/http.dart' as http;
 import 'package:fakestore/home_page.dart';
@@ -228,7 +229,9 @@ class _SignInPageState extends State<SignInPage> {
                               fontWeight: FontWeight.w400),
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SignUpPage()));
+                          },
                           child: Text(
                             "Sign Up",
                             style: TextStyle(

@@ -1,5 +1,6 @@
 import 'dart:collection';
 
+import 'package:fakestore/add_product.dart';
 import 'package:fakestore/splash_screen.dart';
 import 'package:flutter/material.dart';
 

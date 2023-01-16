@@ -41,21 +41,24 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Image.asset("images/shop.png",height: 300,width: 300,),
+    return  SafeArea(
+      child: Scaffold(
+        body: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
 
-            SizedBox(height: 50,),
+              Image.asset("images/shop.png",height: 300,width: 300,),
 
-            spinkit,
-            SizedBox(height: 50,),
-            Text("Welcome to Fake Store",style: TextStyle(fontSize: 18,color: fontColor),),
-          ],
+              SizedBox(height: 50,),
+
+              spinkit,
+              SizedBox(height: 50,),
+              Text("Welcome to Fake Store",style: TextStyle(fontSize: 18,color: fontColor),),
+            ],
+          ),
         ),
       ),
     );

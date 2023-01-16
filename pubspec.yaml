@@ -41,11 +41,14 @@ dependencies:
   http:
   fluttertoast:
   modal_progress_hud_nsn:
-  shared_preferences:
+
   provider:
   flutter_spinkit:
-  dependencies:
   google_fonts: ^3.0.1
+  image_picker: ^0.8.6
+  flutter_screenutil: ^5.6.0
+
+  shared_preferences: ^2.0.16
 
 dev_dependencies:
   flutter_test:

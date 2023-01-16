@@ -39,24 +39,61 @@ class _UserProfilePageState extends State<UserProfilePage> {
   }
 
 
-
-
   @override
   Widget build(BuildContext context) {
     return  SafeArea(
-      child: Container(
-        padding: EdgeInsets.all(10),
-height: MediaQuery.of(context).size.height,
-width: MediaQuery.of(context).size.width,
-        child: Column(
-          children: [
-            CircleAvatar(
-              radius: 100,
-            backgroundImage: NetworkImage("${userTotalList[4].avatar}"),
-            )
-          ],
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: dialogBGColor,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, size: 25,),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+          title: Text(
+            'Profile',
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+          centerTitle: true,
         ),
-      ),
+        body:Container(
+          padding: EdgeInsets.all(10),
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CircleAvatar(
+                radius: 100,
+                backgroundImage: NetworkImage("${userTotalList[0].avatar}"),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Text("Name: ${userTotalList[0].name}", style: myStyle(24, fontColor)),
+              SizedBox(
+                height: 10,
+              ),
+              Text("Role: ${userTotalList[0].role}", style: myStyle(14, fontColor)),
+              SizedBox(
+                height: 10,
+              ),
+              Text("Email: ${userTotalList[0].email}", style: myStyle(14, fontColor)),
+              SizedBox(
+                height: 10,
+              ),
+              Text("Password: ${userTotalList[0].password}", style: myStyle(14, fontColor)),
+              SizedBox(
+                height: 10,
+              ),
+              Text("Creation Profile: ${userTotalList[0].creationAt}", style: myStyle(14, fontColor)),
+              SizedBox(
+                height: 10,
+              ),
+              Text("Updated Profile: ${userTotalList[0].updatedAt}", style: myStyle(14, fontColor)),
+            ],
+          ),
+        ),
+      )
     );
   }
 }

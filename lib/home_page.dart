@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:fakestore/add_product.dart';
 import 'package:fakestore/auth/custom_http.dart';
 import 'package:fakestore/model/all_order_model.dart';
 import 'package:fakestore/peovider/order_provider.dart';
@@ -10,8 +11,6 @@ import 'package:fakestore/widgets/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
-
-
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -36,21 +35,21 @@ class _HomePageState extends State<HomePage> {
       });
     }
   }
+
   @override
-  void initState(){
+  void initState() {
     fetchAllOrder();
   }
 
   @override
   Widget build(BuildContext context) {
-
-
-
-
-    return  Scaffold(
+    return Scaffold(
       appBar: AppBar(
         backgroundColor: dialogBGColor,
-        leading: Icon(Icons.menu, size: 25,),
+        leading: Icon(
+          Icons.menu,
+          size: 25,
+        ),
         title: Text(
           'Fake Store',
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
@@ -59,15 +58,14 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
             iconSize: 25,
-            icon:  Icon(
+            icon: Icon(
               Icons.person,
             ),
             onPressed: () {
               setState(
-                    () {
-
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>UserProfilePage()));
-
+                () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => UserProfilePage()));
                 },
               );
             },
@@ -82,17 +80,23 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         isExtended: true,
-
         backgroundColor: boxColor,
         child: Icon(
-          Icons.add,size: 30,
+          Icons.add,
+          size: 30,
           color: Colors.white,
         ),
-        onPressed: () {
-          // showModalBottomSheet(context: context, builder: (context){
-          //   return  AddPorductPage();
-          // });
-
+        // onPressed: () {
+        //   showModalBottomSheet(context: context, builder: (context){
+        //     return  AddProduct();
+        //   });
+        // },
+        onPressed: (){
+          setState(
+                () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AddProduct()));
+            },
+          );
         },
       ),
       body: SingleChildScrollView(
@@ -101,42 +105,71 @@ class _HomePageState extends State<HomePage> {
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           child: GridView.builder(
-
-              gridDelegate:  SliverGridDelegateWithMaxCrossAxisExtent(
-
-                  maxCrossAxisExtent: 300,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
                   childAspectRatio: 3 / 2,
                   crossAxisSpacing: 20,
                   mainAxisSpacing: 20),
               itemCount: orderList.length,
               itemBuilder: (BuildContext ctx, index) {
                 return Container(
-                  padding: EdgeInsets.all(10),
-                   // height: 600,
-                   // width: 600,
+
+                  margin: EdgeInsets.all(10),
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                       color: boxFontColor,
                       borderRadius: BorderRadius.circular(15)),
                   child: Column(
                     children: [
-                      Image.network("${orderList[index].category!.image}",height: 300,width: 300,fit: BoxFit.contain),
-                      SizedBox(height: 10,),
-                      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                        Text("ID: ${orderList[index].category!.id}",style: myStyle(10, fontColor)),
-                        Text("Product Name: ${orderList[index].category!.name}",style: myStyle(10, fontColor)),
-                      ],),
-                      Text(" ${orderList[index].title}",style: myStyle(14, dialogBGColor,FontWeight.bold),),
-                      SizedBox(height: 10,),
-                      Container(
-                        padding: EdgeInsets.all(5),
-                        child: Center(child: Text("Price: ${orderList[index].price}",style: myStyle(14, fontColor),)),
-                        height: 25,
-                        width:double.infinity,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: boxColor
+
+                         Expanded(
+                           flex: 4,
+                           child: ClipRRect(
+                             borderRadius: BorderRadius.circular(10),
+
+                             child: Image.network(
+                                "${orderList[index].category!.image}",
+                                fit: BoxFit.cover,
+                              width: 100,
+                              height: 80,
+                        ),
+                           ),
+                         ),
+                      Expanded(
+                        flex: 1,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text("ID: ${orderList[index].category!.id}",
+                                style: myStyle(10, fontColor)),
+                            Text(
+                                "Product Name: ${orderList[index].category!.name}",
+                                style: myStyle(10, fontColor)),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Text(
+                          " ${orderList[index].title}",
+                          style: myStyle(11, dialogBGColor, FontWeight.bold),
+                        ),
+                      ),
+
+                      Expanded(
+                        flex: 1,
+                        child: Container(
+
+                          child: Center(
+                              child: Text(
+                            "Price: ${orderList[index].price}",
+                            style: myStyle(12, fontColor),
+                          )),
+                          height: 15,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: boxColor),
                         ),
                       )
                     ],
